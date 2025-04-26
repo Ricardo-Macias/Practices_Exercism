@@ -7,8 +7,11 @@ def round_scores(student_scores):
     :param student_scores: list - float or int of student exam scores.
     :return: list - student scores *rounded* to nearest integer value.
     """
+    scores = []
+    for score in student_scores:
+        scores.insert(0, round(score))
 
-    pass
+    return scores
 
 
 def count_failed_students(student_scores):
@@ -17,8 +20,11 @@ def count_failed_students(student_scores):
     :param student_scores: list - containing int student scores.
     :return: int - count of student scores at or below 40.
     """
-
-    pass
+    count_failed = 0
+    for score in student_scores:
+        if score <= 40:
+            count_failed += 1
+    return count_failed
 
 
 def above_threshold(student_scores, threshold):
@@ -28,8 +34,11 @@ def above_threshold(student_scores, threshold):
     :param threshold: int - threshold to cross to be the "best" score.
     :return: list - of integer scores that are at or above the "best" threshold.
     """
-
-    pass
+    scores = []
+    for score in student_scores:
+        if score >= threshold:
+            scores.append(score)
+    return scores
 
 
 def letter_grades(highest):
@@ -45,8 +54,11 @@ def letter_grades(highest):
             71 <= "B" <= 85
             86 <= "A" <= 100
     """
+    scores = []
+    for count in range(4):
+        scores.append(41 + (int((highest-40)/4))*count)
 
-    pass
+    return scores
 
 
 def student_ranking(student_scores, student_names):
@@ -56,9 +68,10 @@ def student_ranking(student_scores, student_names):
     :param student_names: list - of string names by exam score in descending order.
     :return: list - of strings in format ["<rank>. <student name>: <score>"].
     """
-
-    pass
-
+    raking = []
+    for index in range(len(student_scores)):
+        raking.append(f"{index + 1}. {student_names[index]}: {student_scores[index]}")
+    return raking
 
 def perfect_score(student_info):
     """Create a list that contains the name and grade of the first student to make a perfect score on the exam.
@@ -66,5 +79,7 @@ def perfect_score(student_info):
     :param student_info: list - of [<student name>, <score>] lists.
     :return: list - first `[<student name>, 100]` or `[]` if no student score of 100 is found.
     """
-
-    pass
+    for student in student_info:
+        if 100 in student:
+            return student
+    return []
