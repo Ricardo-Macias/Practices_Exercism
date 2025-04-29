@@ -43,10 +43,11 @@ def decrement_items(inventory, items):
     items = create_inventory(items)
 
     for key, value in items.items():
-        if value > inventory[key]:
-            inventory[key] = 0
-        else:
-            inventory[key] -= value
+        if key in inventory:
+            if value > inventory[key]:
+                inventory[key] = 0
+            else:
+                inventory[key] -= value
 
     return inventory
 
@@ -67,13 +68,10 @@ def list_inventory(inventory):
     :param inventory: dict - an inventory dictionary.
     :return: list of tuples - list of key, value pairs from the inventory dictionary.
     """
-    list_inventory = []
+    list_inventory_dict = []
     for key, value in inventory.items():
         if value != 0:
-            list_inventory.append((key, value))
+            list_inventory_dict.append((key, value))
 
-    return list_inventory
-
-print(list_inventory({"coal":7, "wood":11, "diamond":2, "iron":7, "silver":0}))
-
+    return list_inventory_dict
 
