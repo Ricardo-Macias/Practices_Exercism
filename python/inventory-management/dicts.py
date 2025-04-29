@@ -7,9 +7,14 @@ def create_inventory(items):
     :param items: list - list of items to create an inventory from.
     :return: dict - the inventory dictionary.
     """
-
-    pass
-
+    inventory = {}
+    for value in list(set(items)):
+        count = 0
+        for item in items:
+            if value == item:
+                count += 1
+        inventory[value] = count
+    return inventory
 
 def add_items(inventory, items):
     """Add or increment items in inventory using elements from the items `list`.
@@ -19,8 +24,14 @@ def add_items(inventory, items):
     :return: dict - the inventory updated with the new items.
     """
 
-    pass
+    items = create_inventory(items)
 
+    for key, value in items.items():
+        if key in inventory:
+            inventory[key] += value
+        else:
+            inventory[key] = value
+    return inventory
 
 def decrement_items(inventory, items):
     """Decrement items in inventory using elements from the `items` list.
@@ -29,9 +40,15 @@ def decrement_items(inventory, items):
     :param items: list - list of items to decrement from the inventory.
     :return: dict - updated inventory with items decremented.
     """
+    items = create_inventory(items)
 
-    pass
+    for key, value in items.items():
+        if value > inventory[key]:
+            inventory[key] = 0
+        else:
+            inventory[key] -= value
 
+    return inventory
 
 def remove_item(inventory, item):
     """Remove item from inventory if it matches `item` string.
@@ -40,9 +57,9 @@ def remove_item(inventory, item):
     :param item: str - item to remove from the inventory.
     :return: dict - updated inventory with item removed. Current inventory if item does not match.
     """
-
-    pass
-
+    if item in inventory:
+        inventory.pop(item)
+    return inventory
 
 def list_inventory(inventory):
     """Create a list containing only available (item_name, item_count > 0) pairs in inventory.
@@ -50,6 +67,13 @@ def list_inventory(inventory):
     :param inventory: dict - an inventory dictionary.
     :return: list of tuples - list of key, value pairs from the inventory dictionary.
     """
+    list_inventory = []
+    for key, value in inventory.items():
+        if value != 0:
+            list_inventory.append((key, value))
 
-    pass
+    return list_inventory
+
+print(list_inventory({"coal":7, "wood":11, "diamond":2, "iron":7, "silver":0}))
+
 
