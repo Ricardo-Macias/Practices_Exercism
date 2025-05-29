@@ -117,5 +117,5 @@ def singleton_ingredients(dishes, intersection):
 
     ingredients = set()
     for dish in dishes:
-        ingredients |= (set(dishes) - intersection)
+        ingredients |= (set(dish) - intersection)
     return ingredients
