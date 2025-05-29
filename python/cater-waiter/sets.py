@@ -9,7 +9,6 @@ from sets_categories_data import (VEGAN,
                                   ALCOHOLS,
                                   SPECIAL_INGREDIENTS)
 
-
 def clean_ingredients(dish_name, dish_ingredients):
     """Remove duplicates from `dish_ingredients`.
 
@@ -21,7 +20,7 @@ def clean_ingredients(dish_name, dish_ingredients):
     followed by the de-duped `set` of ingredients as the second item.
     """
 
-    pass
+    return (dish_name, set(dish_ingredients))
 
 
 def check_drinks(drink_name, drink_ingredients):
@@ -36,8 +35,7 @@ def check_drinks(drink_name, drink_ingredients):
 
     """
 
-    pass
-
+    return drink_name + " Cocktail" if (set(drink_ingredients).issubset(ALCOHOLS)) else drink_name + " Mocktail"
 
 def categorize_dish(dish_name, dish_ingredients):
     """Categorize `dish_name` based on `dish_ingredients`.
@@ -52,8 +50,16 @@ def categorize_dish(dish_name, dish_ingredients):
 
     """
 
-    pass
-
+    if((VEGAN & dish_ingredients).issuperset(set(dish_ingredients))):
+        return dish_name + " : VEGAN"
+    if((VEGETARIAN & dish_ingredients).issuperset(set(dish_ingredients))):
+        return dish_name + " : VEGETARIAN"
+    if((KETO & dish_ingredients).issuperset(set(dish_ingredients))):
+        return dish_name + " : KETO"
+    if((PALEO & dish_ingredients).issuperset(set(dish_ingredients))):
+        return dish_name + " : PALEO"
+    if((OMNIVORE & dish_ingredients).issuperset(set(dish_ingredients))):
+        return dish_name + " : OMNIVORE"
 
 def tag_special_ingredients(dish):
     """Compare `dish` ingredients to `SPECIAL_INGREDIENTS`.
@@ -66,8 +72,7 @@ def tag_special_ingredients(dish):
     SPECIAL_INGREDIENTS constant imported from `sets_categories_data.py`.
     """
 
-    pass
-
+    return (dish[0], set(dish[1]) & SPECIAL_INGREDIENTS)
 
 def compile_ingredients(dishes):
     """Create a master list of ingredients.
@@ -77,9 +82,10 @@ def compile_ingredients(dishes):
 
     This function should return a `set` of all ingredients from all listed dishes.
     """
-
-    pass
-
+    ingredients = set()
+    for item in dishes:
+        ingredients |= set(item)
+    return ingredients
 
 def separate_appetizers(dishes, appetizers):
     """Determine which `dishes` are designated `appetizers` and remove them.
