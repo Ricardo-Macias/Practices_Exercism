@@ -35,7 +35,7 @@ def check_drinks(drink_name, drink_ingredients):
 
     """
 
-    return drink_name + " Cocktail" if (set(drink_ingredients).issubset(ALCOHOLS)) else drink_name + " Mocktail"
+    return drink_name + " Cocktail" if (set(drink_ingredients) & ALCOHOLS) else drink_name + " Mocktail"
 
 def categorize_dish(dish_name, dish_ingredients):
     """Categorize `dish_name` based on `dish_ingredients`.
@@ -51,15 +51,15 @@ def categorize_dish(dish_name, dish_ingredients):
     """
 
     if((VEGAN & dish_ingredients).issuperset(set(dish_ingredients))):
-        return dish_name + " : VEGAN"
+        return dish_name + ": VEGAN"
     if((VEGETARIAN & dish_ingredients).issuperset(set(dish_ingredients))):
-        return dish_name + " : VEGETARIAN"
+        return dish_name + ": VEGETARIAN"
     if((KETO & dish_ingredients).issuperset(set(dish_ingredients))):
-        return dish_name + " : KETO"
+        return dish_name + ": KETO"
     if((PALEO & dish_ingredients).issuperset(set(dish_ingredients))):
-        return dish_name + " : PALEO"
+        return dish_name + ": PALEO"
     if((OMNIVORE & dish_ingredients).issuperset(set(dish_ingredients))):
-        return dish_name + " : OMNIVORE"
+        return dish_name + ": OMNIVORE"
 
 def tag_special_ingredients(dish):
     """Compare `dish` ingredients to `SPECIAL_INGREDIENTS`.
