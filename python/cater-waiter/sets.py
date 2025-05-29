@@ -98,8 +98,7 @@ def separate_appetizers(dishes, appetizers):
     Either list could contain duplicates and may require de-duping.
     """
 
-    pass
-
+    return set(dishes) - set(appetizers)
 
 def singleton_ingredients(dishes, intersection):
     """Determine which `dishes` have a singleton ingredient (an ingredient that only appears once across dishes).
@@ -116,4 +115,7 @@ def singleton_ingredients(dishes, intersection):
     The function should return a `set` of ingredients that only appear in a single dish.
     """
 
-    pass
+    ingredients = set()
+    for dish in dishes:
+        ingredients |= (dishes - intersection)
+    return ingredients
